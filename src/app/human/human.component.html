@@ -1,0 +1,57 @@
+<b>
+  <p>Human Created</p>
+</b>
+
+<div class="container">
+  <form [formGroup]="humanForm" (ngSubmit)="addNewHuman(humanForm.value)">
+    <div class="form-group">
+      <input type="text" class="form-control" value="Id" formControlName="Id" placeholder="Enter the Id" [(ngModel)]="this.singleHuman.Id"
+        name="Id">
+      <span *ngIf="!humanForm.get('Id').valid && humanForm.get('Id').touched" class="help-block">Please Enter a valid
+        id </span>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" formControlName="Name" placeholder="Enter the name" [(ngModel)]="this.singleHuman.Name"
+        name="Name">
+      <span *ngIf="!humanForm.get('Name').valid && humanForm.get('Name').touched" class="help-block">Please Enter a
+        valid Name </span>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" formControlName="Email" placeholder="Enter the email" [(ngModel)]="this.singleHuman.Email"
+        name="Email">
+      <span *ngIf="!humanForm.get('Email').valid && humanForm.get('Email').touched" class="help-block">Please Enter a
+        valid Email </span>
+    </div>
+
+    <div>
+      <span *ngIf="!humanForm.valid && humanForm.touched" class="help-block">Please Enter a valid Data </span>
+      <!-- <button type="button" class="btn btn-primary" (click)= "createHuman(formHuman)">Create Human -->
+      <button type="submit" class="btn btn-primary">{{editHumanSelected ? 'Edit' : 'Create'}} Human </button>
+    </div>
+  </form>
+
+  <h3 *ngIf="is_add">{{coment}}</h3>
+</div>
+
+<b>Human List</b>
+<table border="1">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let h of humans">
+      <td>{{h.Id}}</td>
+      <td>{{h.Name}}</td>
+      <td>{{h.Email}}</td>
+      <td><button class="btn btn-primary" (click)="edit(h)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="delete(h)">Delete</button></td>
+      <td><button class="btn btn-primary" (click)="details(h)">Details</button></td>
+      <!-- <td><a [routerLink]="['/human-details']"> <button class="btn btn-info"> Details</button></a></td> -->
+    </tr>
+  </tbody>
+</table>
